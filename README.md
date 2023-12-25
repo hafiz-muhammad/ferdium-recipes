@@ -8,7 +8,7 @@
 
 <a href="https://github.com/ferdium/ferdium-recipes/actions/workflows/builds.yml"><img alt="Build Status" src="https://github.com/ferdium/ferdium-recipes/actions/workflows/builds.yml/badge.svg?branch=main&event=push"></a>
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href='#contributors-'><img src='https://img.shields.io/badge/contributors-129-default.svg?logo=github' alt='Contributors'/></a>
+<a href='#contributors-'><img src='https://img.shields.io/badge/contributors-140-default.svg?logo=github' alt='Contributors'/></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- TODO: Uncomment once we get funding sorted
 <a href="#backers-via-opencollective"><img alt="Open Collective backers" src="https://img.shields.io/opencollective/backers/getferdi?logo=open-collective"></a>
@@ -18,7 +18,9 @@
 
 Recipes are small scripts that are responsible for providing the connection between your services (e.g. WhatsApp, Gmail or Slack) and Ferdium. It provides Ferdium information like the number of current notifications, handles enabling dark mode and may otherwise improve your experience with the service.
 
-## Creating and adding your own recipes
+## Creating, adding, and editing recipes
+
+**Important:** Please make sure to run `pnpm validate` before submitting.
 
 * [Overview / How to create a Ferdium integration](docs/integration.md)
 * [How to update/change recipes](docs/updating.md)
@@ -81,7 +83,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href='https://github.com/oda-alexandre' title='Maitre_Oda: code'><img src='https://avatars.githubusercontent.com/u/43296168?v=4' alt='oda-alexandre' style='width:100px;'/></a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href='https://github.com/mcmxcdev' title='MCMXC: code'><img src='https://avatars.githubusercontent.com/u/16797721?v=4' alt='mcmxcdev' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/mcmxcdev' title='MCMXC: code, review'><img src='https://avatars.githubusercontent.com/u/16797721?v=4' alt='mcmxcdev' style='width:100px;'/></a></td>
       <td align="center" valign="top" width="14.28%"><a href='https://gaitenis.id.lv/' title='Edgars: code'><img src='https://avatars.githubusercontent.com/u/9976861?v=4' alt='eandersons' style='width:100px;'/></a></td>
       <td align="center" valign="top" width="14.28%"><a href='https://arthurbrugiere.fr/' title='Arthur Brugière: code'><img src='https://avatars.githubusercontent.com/u/16764085?v=4' alt='RoiArthurB' style='width:100px;'/></a></td>
       <td align="center" valign="top" width="14.28%"><a href='https://github.com/iansealy' title='Ian Sealy: code'><img src='https://avatars.githubusercontent.com/u/92045?v=4' alt='iansealy' style='width:100px;'/></a></td>
@@ -201,6 +203,19 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href='http://linuxdojo.com' title='George Murdocca: code'><img src='https://avatars.githubusercontent.com/u/3752765?v=4' alt='gmurdocca' style='width:100px;'/></a></td>
       <td align="center" valign="top" width="14.28%"><a href='https://github.com/meiphoo7-Mae' title='meiphoo7-Mae: code'><img src='https://avatars.githubusercontent.com/u/95827976?v=4' alt='meiphoo7-Mae' style='width:100px;'/></a></td>
       <td align="center" valign="top" width="14.28%"><a href='https://dictcp.men' title='Dick Tang: code'><img src='https://avatars.githubusercontent.com/u/1752436?v=4' alt='dictcp' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/kryst4line' title='kryst4line: code'><img src='https://avatars.githubusercontent.com/u/145540037?v=4' alt='kryst4line' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://www.geekytidbits.com' title='Brady Holt: code'><img src='https://avatars.githubusercontent.com/u/759811?v=4' alt='bradymholt' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/nikolaykhodov' title='Nikolay Khodov: code'><img src='https://avatars.githubusercontent.com/u/101510?v=4' alt='nikolaykhodov' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/daudfatihah' title='daudfatihah: code'><img src='https://avatars.githubusercontent.com/u/15126928?v=4' alt='daudfatihah' style='width:100px;'/></a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/SpecialAro' title='André Oliveira: code, infra'><img src='https://avatars.githubusercontent.com/u/37463445?v=4' alt='SpecialAro' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/oc013' title='oc013: code'><img src='https://avatars.githubusercontent.com/u/101832295?v=4' alt='oc013' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/ahmed-zhran' title='ahmed-zhran: code'><img src='https://avatars.githubusercontent.com/u/29282428?v=4' alt='ahmed-zhran' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://linktr.ee/tiz_huglife' title='Trent McPheron: code'><img src='https://avatars.githubusercontent.com/u/4130673?v=4' alt='HugLifeTiZ' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/lincolnthalles' title='Lincoln Nogueira: code'><img src='https://avatars.githubusercontent.com/u/7476810?v=4' alt='lincolnthalles' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='http://pleskot.net' title='Arnost Pleskot: code'><img src='https://avatars.githubusercontent.com/u/7094061?v=4' alt='arnostpleskot' style='width:100px;'/></a></td>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/Cknight70' title='Cknight70: code'><img src='https://avatars.githubusercontent.com/u/28763729?v=4' alt='Cknight70' style='width:100px;'/></a></td>
     </tr>
   </tbody>
 </table>

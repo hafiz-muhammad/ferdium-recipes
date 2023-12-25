@@ -5,18 +5,19 @@
     "doc": "docs"
   },
   "engines": {
-    "node": "18.15.0",
-    "pnpm": "8.7.1"
+    "node": "^20.9.0",
+    "pnpm": "^8.10.0"
   },
   "volta": {
-    "node": "18.15.0",
-    "pnpm": "8.7.1"
+    "node": "20.9.0",
+    "pnpm": "8.10.0"
   },
   "engine-strict": true,
-  "packageManager": "pnpm@8.7.1",
+  "packageManager": "pnpm@8.10.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "is-ci || husky install",
+    "validate": "pnpm lint:fix && pnpm reformat-files && pnpm package",
     "package": "node scripts/package.js",
     "create": "node scripts/create.js",
     "lint": "eslint \"{recipes,scripts}/**/*.{js,jsx,ts,tsx}\"",
