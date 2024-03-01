@@ -1279,6 +1279,60 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Mralexandresys",
+      "name": "Alexandre",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32882826?v=4",
+      "profile": "https://github.com/Mralexandresys",
+      "contributions": [
+        "infra"
+      ]
+    },
+    {
+      "login": "Lillecarl",
+      "name": "Ujp8LfXBJ6wCPR",
+      "avatar_url": "https://avatars.githubusercontent.com/u/207073?v=4",
+      "profile": "https://lillecarl.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "cloopadoop",
+      "name": "Clayton",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1791012?v=4",
+      "profile": "http://claytonbelcher.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "martin-braun",
+      "name": "Martin Braun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24259245?v=4",
+      "profile": "https://martin-braun.net/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "czukowski",
+      "name": "Korney Czukowski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186792?v=4",
+      "profile": "https://github.com/czukowski",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "pwsimon",
+      "name": "Peter Simon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7318288?v=4",
+      "profile": "https://github.com/pwsimon",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs"
