@@ -1,5 +1,8 @@
 /* eslint-disable no-console */
 
+// Capture the start time
+const startTime = new Date();
+
 /**
  * Package all recipes
  */
@@ -13,7 +16,8 @@ const pkgVersionChangedMatcher = /\n\+.*version.*/;
 
 // Publicly availible link to this repository's recipe folder
 // Used for generating public icon URLs
-const repo = 'https://cdn.jsdelivr.net/gh/ferdium/ferdium-recipes/recipes/';
+const repo =
+  'https://cdn.jsdelivr.net/gh/ferdium/ferdium-recipes@main/recipes/';
 
 // Helper: Compress src folder into dest file
 const compress = (src, dest) =>
@@ -25,7 +29,11 @@ const compress = (src, dest) =>
         tar: {
           // Don't package .DS_Store files and .md files
           ignore(name) {
-            return path.basename(name) === '.DS_Store' || name.endsWith('.md');
+            return (
+              path.basename(name) === '.DS_Store' ||
+              name.endsWith('.md') ||
+              name.endsWith('.svg')
+            );
           },
         },
       },
@@ -43,17 +51,20 @@ const compress = (src, dest) =>
 (async () => {
   // Create paths to important files
   const repoRoot = path.join(__dirname, '..');
+  const tempFolder = path.join(repoRoot, 'temp');
   const recipesFolder = path.join(repoRoot, 'recipes');
   const outputFolder = path.join(repoRoot, 'archives');
   const allJson = path.join(repoRoot, 'all.json');
   const featuredFile = path.join(repoRoot, 'featured.json');
-  const featuredRecipes = await fs.readJSON(featuredFile);
+  const featuredRecipes = fs.readJSONSync(featuredFile);
   let recipeList = [];
   let unsuccessful = 0;
 
-  await fs.ensureDir(outputFolder);
-  await fs.emptyDir(outputFolder);
-  await fs.remove(allJson);
+  fs.ensureDirSync(outputFolder);
+  fs.emptyDirSync(outputFolder);
+  fs.ensureDirSync(tempFolder);
+  fs.emptyDirSync(tempFolder);
+  fs.removeSync(allJson);
 
   const git = await simpleGit(repoRoot);
   const isGitRepo = await git.checkIsRepo();
@@ -68,13 +79,12 @@ const compress = (src, dest) =>
 
   for (const recipe of availableRecipes) {
     const recipeSrc = path.join(recipesFolder, recipe);
-    const mandatoryFiles = ['package.json', 'icon.svg', 'webview.js'];
+    const mandatoryFiles = ['package.json', 'webview.js'];
 
     // Check that each mandatory file exists
     for (const file of mandatoryFiles) {
       const filePath = path.join(recipeSrc, file);
-      // eslint-disable-next-line no-await-in-loop
-      if (!(await fs.pathExists(filePath))) {
+      if (!fs.existsSync(filePath)) {
         console.log(
           `⚠️ Couldn't package "${recipe}": Folder doesn't contain a "${file}".`,
         );
@@ -87,20 +97,21 @@ const compress = (src, dest) =>
 
     // Check icons sizes
     const svgIcon = path.join(recipeSrc, 'icon.svg');
-    const svgSize = sizeOf(svgIcon);
-    const svgHasRightSize = svgSize.width === svgSize.height;
-    if (!svgHasRightSize) {
-      console.log(
-        `⚠️ Couldn't package "${recipe}": Recipe SVG icon isn't a square`,
-      );
-      unsuccessful += 1;
-      continue;
+    if (fs.existsSync(svgIcon)) {
+      const svgSize = sizeOf(svgIcon);
+      const svgHasRightSize = svgSize.width === svgSize.height;
+      if (!svgHasRightSize) {
+        console.log(
+          `⚠️ Couldn't package "${recipe}": Recipe SVG icon isn't a square`,
+        );
+        unsuccessful += 1;
+        continue;
+      }
     }
 
     // Check that user.js does not exist
     const userJs = path.join(recipeSrc, 'user.js');
-    // eslint-disable-next-line no-await-in-loop
-    if (await fs.pathExists(userJs)) {
+    if (fs.existsSync(userJs)) {
       console.log(
         `⚠️ Couldn't package "${recipe}": Folder contains a "user.js".`,
       );
@@ -110,8 +121,7 @@ const compress = (src, dest) =>
 
     // Read package.json
     const packageJson = path.join(recipeSrc, 'package.json');
-    // eslint-disable-next-line no-await-in-loop
-    const config = await fs.readJson(packageJson);
+    const config = fs.readJsonSync(packageJson);
 
     // Make sure it contains all required fields
     if (!config) {
@@ -179,6 +189,7 @@ const compress = (src, dest) =>
       'repository',
       'aliases',
       'config',
+      'defaultIcon',
     ]);
     const unrecognizedKeys = topLevelKeys.filter(
       x => !knownTopLevelKeys.has(x),
@@ -245,7 +256,9 @@ const compress = (src, dest) =>
             result.insertions !== 0 ||
             result.deletions !== 0)
         ) {
-          const pkgJsonRelative = path.relative(repoRoot, packageJson);
+          const pkgJsonRelative = path.normalize(
+            path.relative(repoRoot, packageJson),
+          );
           if (result.files.some(({ file }) => file === pkgJsonRelative)) {
             git.diff(pkgJsonRelative, (_diffErr, diffResult) => {
               if (diffResult && !pkgVersionChangedMatcher.test(diffResult)) {
@@ -264,8 +277,9 @@ const compress = (src, dest) =>
     }
 
     if (configErrors.length > 0) {
-      console.log(`⚠️ Couldn't package "${recipe}": There were errors in the recipe's package.json:
-  ${configErrors.reduce((str, err) => `${str}\n${err}`)}`);
+      console.log(
+        `⚠️ Couldn't package "${recipe}": There were errors in the recipe's package.json: ${configErrors.reduce((str, err) => `${str}\n${err}`)}`,
+      );
       unsuccessful += 1;
     }
 
@@ -276,8 +290,42 @@ const compress = (src, dest) =>
       unsuccessful += 1;
     }
 
+    // Copy recipe to temp folder
+    fs.copySync(recipeSrc, path.join(tempFolder, config.id), {
+      filter: src => !src.endsWith('icon.svg'),
+    });
+
+    if (!config.defaultIcon) {
+      // Check if icon.svg exists
+      if (!fs.existsSync(svgIcon)) {
+        console.log(
+          `⚠️ Couldn't package "${recipe}": The recipe doesn't contain a "icon.svg" or "defaultIcon" in package.json`,
+        );
+        unsuccessful += 1;
+      }
+
+      const tempPackage = fs.readJsonSync(
+        path.join(tempFolder, config.id, 'package.json'),
+      );
+      tempPackage.defaultIcon = `${repo}${config.id}/icon.svg`;
+
+      fs.writeJSONSync(
+        path.join(tempFolder, config.id, 'package.json'),
+        tempPackage,
+        // JSON.stringify(tempPackage, null, 2),
+        {
+          spaces: 2,
+          EOL: '\n',
+        },
+      );
+    }
+
     // Package to .tar.gz
-    compress(recipeSrc, path.join(outputFolder, `${config.id}.tar.gz`));
+    // eslint-disable-next-line no-await-in-loop
+    await compress(
+      path.join(tempFolder, config.id),
+      path.join(outputFolder, `${config.id}.tar.gz`),
+    );
 
     // Add recipe to all.json
     const isFeatured = featuredRecipes.includes(config.id);
@@ -300,13 +348,19 @@ const compress = (src, dest) =>
     const textB = b.id.toLowerCase();
     return textA < textB ? -1 : textA > textB ? 1 : 0;
   });
-  await fs.writeJson(allJson, recipeList, {
+  fs.writeJsonSync(allJson, recipeList, {
     spaces: 2,
     EOL: '\n',
   });
 
+  // Clean up
+  fs.removeSync(tempFolder);
+
+  // Capture the end time
+  const endTime = new Date();
+
   console.log(
-    `✅ Successfully packaged and added ${recipeList.length} recipes (${unsuccessful} unsuccessful recipes)`,
+    `✅ Successfully packaged and added ${recipeList.length} recipes (${unsuccessful} unsuccessful recipes) in ${(endTime - startTime) / 1000} seconds`,
   );
 
   if (unsuccessful > 0) {

@@ -1333,6 +1333,78 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Serene-Arc",
+      "name": "Serene ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33189705?v=4",
+      "profile": "https://github.com/Serene-Arc",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "marcosins",
+      "name": "Marco",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14003389?v=4",
+      "profile": "https://github.com/marcosins",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "YaMoef",
+      "name": "Brent Claessens",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34712836?v=4",
+      "profile": "https://github.com/YaMoef",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Xaviju",
+      "name": "Xaviju",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1343702?v=4",
+      "profile": "https://github.com/Xaviju",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "real-or-random",
+      "name": "Tim Ruffing",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1071625?v=4",
+      "profile": "https://github.com/real-or-random",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sakarimov",
+      "name": "sulthankarimov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5676876?v=4",
+      "profile": "https://sulthankarimov.my.id",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Shampra",
+      "name": "Shampra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16141040?v=4",
+      "profile": "https://github.com/Shampra",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "xmha97",
+      "name": "Muhammadhussein Ammari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23485114?v=4",
+      "profile": "http://xmha97.github.io",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs"
